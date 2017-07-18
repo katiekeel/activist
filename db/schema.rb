@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 3) do
+ActiveRecord::Schema.define(version: 6) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,11 +28,32 @@ ActiveRecord::Schema.define(version: 3) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "events_groups", id: false, force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "group_id", null: false
+    t.index ["event_id", "group_id"], name: "index_events_groups_on_event_id_and_group_id"
+    t.index ["group_id", "event_id"], name: "index_events_groups_on_group_id_and_event_id"
+  end
+
+  create_table "events_interests", id: false, force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "interest_id", null: false
+    t.index ["event_id", "interest_id"], name: "index_events_interests_on_event_id_and_interest_id"
+    t.index ["interest_id", "event_id"], name: "index_events_interests_on_interest_id_and_event_id"
+  end
+
   create_table "groups", force: :cascade do |t|
     t.text "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "groups_interests", id: false, force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "interest_id", null: false
+    t.index ["group_id", "interest_id"], name: "index_groups_interests_on_group_id_and_interest_id"
+    t.index ["interest_id", "group_id"], name: "index_groups_interests_on_interest_id_and_group_id"
   end
 
   create_table "interests", force: :cascade do |t|
