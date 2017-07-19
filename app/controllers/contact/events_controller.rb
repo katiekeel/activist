@@ -1,4 +1,5 @@
 class Contact::EventsController < ApplicationController
+
   def index
   end
 
