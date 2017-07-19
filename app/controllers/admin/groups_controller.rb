@@ -1,2 +1,2 @@
-class Admin::GroupsController < ApplicationController
+class Admin::GroupsController < Admin::BaseController
 end

@@ -1,9 +1,10 @@
 class Contact::GroupsController < ApplicationController
   def index
-    @group = Group.find_by(params[:group_id])
+    @groups = current_user.groups
   end
 
   def show
+    @group = current_user.groups.find_by(params[:group_id])
   end
 
   def create

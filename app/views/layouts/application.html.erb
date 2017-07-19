@@ -1,6 +1,10 @@
 <html>
 
   <head>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
+    <%= csrf_meta_tags %>
+
     <meta charset="utf-8">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,7 +42,6 @@
         s.parentNode.insertBefore(hm, s);
       })();
     </script>
-
   </head>
 
   <body>
@@ -62,6 +65,11 @@
             <li><%= link_to "Events", events_path %></li>
             <li><%= link_to "Groups", groups_path %></li>
             <li><%= link_to "Interests", interests_path %></li>
+            <% if current_user %>
+              <li><%= link_to "Logout", logout_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to "Login", login_path %></li>
+            <% end %>
           </ul>
         </div>
 
@@ -69,6 +77,9 @@
     </nav>
 
           <div class="container-fluid text-center">
+            <% flash.each do |key, value| %>
+              <%= content_tag :div, value %>
+            <% end %><br/>
             <%= yield %>
           </div>
 
