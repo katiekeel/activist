@@ -6,7 +6,7 @@
       <tbody>
         <% @group.events.each do |event| %>
           <tr>
-            <th scope="row" class="text-center"><%= link_to event.name, event_path(event) %> - <%= event.human_date %></th>
+            <th scope="row" class="text-center"><%= link_to event.name, event_path(event) %> - <%= event.human_dates[0] %></th>
           </tr>
         <% end %>
       </tbody>

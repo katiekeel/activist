@@ -11,8 +11,9 @@ class SessionsController < ApplicationController
     elsif user.authenticate(params[:session][:password])
       session[:user_id] = user.id
       flash[:notice] = "Successful login"
-      redirect_back(fallback_location: root_path)
+      redirect_to root_path
     else
+      flash[:notice] = "The database doesn't like you. Try again or make an account."
       render :new
     end
   end

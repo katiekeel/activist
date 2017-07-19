@@ -1,6 +1,10 @@
 <h1><%= @interest.name %></h1>
 
 <div class="container">
+
+  <% if @interest.groups.empty? %>
+    <h2>no stuff for this interest yet!</h2>
+  <% else %>
   <div class="col-md-6 text-center">
     <h3>Groups</h3>
       <table class="table">
@@ -20,10 +24,11 @@
       <tbody>
         <% @interest.events.each do |event| %>
           <tr>
-            <th scope="row" class="text-center"><%= link_to event.name, event_path(event) %> - <%= event.human_date %></th>
+            <th scope="row" class="text-center"><%= link_to event.name, event_path(event) %> - <%= event.human_dates[0] %></th>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
 </div>
+<% end %>
