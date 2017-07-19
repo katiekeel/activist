@@ -7,5 +7,7 @@ FactoryGirl.define do
     sequence :description do |i|
       "Description #{i}"
     end
+
+    contact
   end
 end

@@ -13,6 +13,12 @@ RSpec.describe Group, type: :model do
 
       expect(group).to_not be_valid
     end
+
+    it "is invalid without a contact" do
+      group = build(:group, contact: nil)
+
+      expect(group).to_not be_valid
+    end
   end
 
   describe "Relationships" do
