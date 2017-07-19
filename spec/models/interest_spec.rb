@@ -7,6 +7,7 @@ RSpec.describe Interest, type: :model do
 
       expect(interest).to_not be_valid
     end
+  end
 
   describe "Relationships" do
     it "has many groups" do
@@ -16,7 +17,7 @@ RSpec.describe Interest, type: :model do
 
       interest = create(:interest, :with_groups)
 
-      expect interest.groups.count to eq 3
+      expect(interest.groups.count).to eq 3
     end
 
     it "has many groups" do
@@ -26,7 +27,7 @@ RSpec.describe Interest, type: :model do
 
       interest = create(:interest, :with_groups)
 
-      expect interest.groups.count to eq 3
+      expect(interest.groups.count).to eq 3
     end
   end
 

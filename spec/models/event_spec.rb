@@ -59,17 +59,18 @@ RSpec.describe Event, type: :model do
 
       event = create(:event, :with_groups)
 
-      expect event.groups.count to eq 3
+      expect(event.groups.count).to eq 3
     end
 
     it "has many interests" do
+      # byebug
       event = create(:event)
 
       expect(event).to respond_to(:interests)
 
       event = create(:event, :with_interests)
 
-      expect event.interests.count to eq 3
+      expect(event.interests.count).to eq 3
     end
   end
 

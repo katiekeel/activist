@@ -9,11 +9,11 @@ FactoryGirl.define do
     end
 
     sequence :start_date do |i|
-      "2017-05-1#{i}"
+      "2017-05-16"
     end
 
     sequence :end_date do |i|
-      "2017-05-1#{i}"
+      "2017-05-17"
     end
 
     sequence :start_time do |i|
