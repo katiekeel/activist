@@ -1,0 +1,5 @@
+<h1>All Interests</h1>
+
+<% @interests.each do |interest| %>
+  <%= link_to interest.name, interest_path(interest) %><br/>
+<% end %>

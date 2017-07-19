@@ -1,0 +1,29 @@
+<h1><%= @interest.name %></h1>
+
+<div class="container">
+  <div class="col-md-6 text-center">
+    <h3>Groups</h3>
+      <table class="table">
+      <tbody>
+        <% @interest.groups.each do |group| %>
+          <tr>
+            <th scope="row" class="text-center"><%= link_to group.name, group_path(group) %></th>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Events</h3>
+    <table class="table">
+      <tbody>
+        <% @interest.events.each do |event| %>
+          <tr>
+            <th scope="row" class="text-center"><%= link_to event.name, event_path(event) %> - <%= event.human_date %></th>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

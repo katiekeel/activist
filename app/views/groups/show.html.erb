@@ -1,0 +1,14 @@
+<h1><%= @group.name %></h1>
+
+<div class="container">
+    <h3>Events</h3>
+    <table class="table">
+      <tbody>
+        <% @group.events.each do |event| %>
+          <tr>
+            <th scope="row" class="text-center"><%= link_to event.name, event_path(event) %> - <%= event.human_date %></th>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>

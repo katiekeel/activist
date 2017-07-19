@@ -9,4 +9,19 @@ class Event < ApplicationRecord
   validates :zipcode, presence: true
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :interests
+
+  def human_dates
+    dates = []
+    dates << self.start_date.strftime("%A, %d %b %Y")
+    dates << self.end_date.strftime("%A, %d %b %Y")
+    dates
+  end
+
+  def human_times
+    times = []
+    times << self.start_time.strftime("%l:%m %p")
+    times << self.end_time.strftime("%l:%m %p")
+    times
+  end
+
 end
