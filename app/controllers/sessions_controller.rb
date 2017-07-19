@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Successful login"
       redirect_to root_path
     else
-      flash[:notice] = "The database doesn't like you. Try again or make an account."
+      flash[:notice] = "The password you entered doesn't match that user. Please try again or create an account."
       render :new
     end
   end

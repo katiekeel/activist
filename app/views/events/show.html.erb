@@ -1,4 +1,9 @@
 <h1><%= @event.name %></h1>
+<h3>with
+  <% @event.groups.each do |group| %>
+    <%= link_to group.name, group_path(group) %><br/>
+  <% end %>
+</h3>
 
 <div class="container text-center">
   <h3><strong>Description: </strong><%= @event.description %></h3>
@@ -8,3 +13,9 @@
   <h3><strong>End Time:</strong><%= @event.human_times[1] %></h3>
   <h3><strong>Location: </strong><%= @event.location %></h3>
 </div>
+
+<h4> the group holding this event is interested in:
+  <% @event.interests.each do |interest| %>
+      <%= link_to interest.name, interest_path(interest) %>
+  <% end %>
+</h4>

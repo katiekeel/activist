@@ -55,6 +55,38 @@ describe "User visits home page and" do
       expect(current_path).to eq "/"
       expect(page).to have_content "Successful login"
     end
+
+    scenario "with invalid username" do
+      user = create(:user)
+
+      visit '/'
+
+      click_link "Login"
+
+      fill_in "session[name]", with: "notarealusername"
+      fill_in "session[password]", with: "notarealpassword"
+
+      click_button "Log in"
+
+      expect(current_path).to eq "/login"
+      expect(page).to have_content "We don't have a user with that name. Please try again or create an account."
+    end
+
+    scenario "with invalid password" do
+      user = create(:user)
+
+      visit '/'
+
+      click_link "Login"
+
+      fill_in "session[name]", with: user.name
+      fill_in "session[password]", with: "notarealpassword"
+
+      click_button "Log in"
+
+      expect(current_path).to eq "/login"
+      expect(page).to have_content "The password you entered doesn't match that user. Please try again or create an account."
+    end
   end
 
   context "is logged in already" do

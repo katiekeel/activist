@@ -1,5 +1,11 @@
 <h1><%= @group.name %></h1>
 
+<h3>Interests:
+  <% @group.interests.each do |interest| %>
+    <%= link_to interest.name, interest_path(interest) %>
+  <% end %>
+</h3>
+
 <div class="container">
     <h3>Events</h3>
     <table class="table">
