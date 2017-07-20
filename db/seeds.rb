@@ -1,8 +1,8 @@
-# require 'database_cleaner'
-#
-# DatabaseCleaner.strategy = :truncation
-#
-# DatabaseCleaner.clean
+require 'database_cleaner'
+
+DatabaseCleaner.strategy = :truncation
+
+DatabaseCleaner.clean
 
 Group.destroy_all
 Interest.destroy_all

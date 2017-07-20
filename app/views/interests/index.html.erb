@@ -1,5 +1,26 @@
 <h1>All Interests</h1>
 
-<% @interests.each do |interest| %>
-  <%= link_to interest.name, interest_path(interest) %><br/>
-<% end %>
+<div class="row">
+  <div class="col-md-12">
+
+    <table class="table">
+
+      <thead>
+        <th>Interest</th>
+        <th>Group Count</th>
+        <th>Event Count</th>
+      </thead>
+
+      <tbody>
+        <% @interests.each do |interest| %>
+        <tr>
+          <th scope="row"><%= interest.name %></th>
+            <td> <%= interest.groups.count %></td>
+            <td> <%= interest.events.count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>

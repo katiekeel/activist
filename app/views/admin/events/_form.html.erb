@@ -1,0 +1,38 @@
+<%= form_for [:admin, @event] do |f| %>
+  <%= f.label :name %><br/>
+  <%= f.text_field :name %><br/><br/>
+
+  <%= f.label :description %><br/>
+  <%= f.text_area :description %><br/><br/>
+
+  <%= f.label :start_date %><br/>
+  <%= f.date_field :start_date %><br/><br/>
+
+  <%= f.label :end_date %><br/>
+  <%= f.date_field :end_date %><br/><br/>
+
+  <%= f.label :start_time %><br/>
+  <%= f.time_field :start_time %><br/><br/>
+
+  <%= f.label :end_time %><br/>
+  <%= f.time_field :end_time %><br/><br/>
+
+  <%= f.label :location %><br/>
+  <%= f.text_field :location %><br/><br/>
+
+  <%= f.label :zipcode %><br/>
+  <%= f.number_field :zipcode %><br/><br/>
+
+  <%= f.label :groups %><br/>
+  <%= f.fields_for :groups, @event.groups do |group| %>
+    <%= f.collection_select :group_ids, Group.order(:name), :id, :name %>
+  <% end %><br/><br/>
+
+  <%= f.label :interests %><br/>
+  <%= f.fields_for :interests, @event.interests do |interest| %>
+    <%= f.collection_select :interest_ids, Interest.order(:name), :id, :name %>
+  <% end %><br/><br/>
+
+  <%= f.submit %>
+
+<% end %>

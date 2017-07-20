@@ -1,1 +1,28 @@
 <h1>Admin Interests</h1>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <table class="table">
+
+      <thead>
+        <th>Interest</th>
+        <th>Group Count</th>
+        <th>Event Count</th>
+      </thead>
+
+      <tbody>
+        <% @interests.each do |interest| %>
+        <tr>
+          <th scope="row"><%= interest.name %></th>
+            <td> <%= interest.groups.count %></td>
+            <td> <%= interest.events.count %></td>
+            <td> <%= link_to "Edit", edit_admin_interest_path(interest) %></td>
+            <td> <%= link_to "Delete", admin_interest_path(interest), method: :delete %>
+        </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<%= form_for [:admin, @group] do |f| %>
+  <%= f.label :name %><br/>
+  <%= f.text_field :name %><br/><br/>
+
+  <%= f.label :description %><br/>
+  <%= f.text_area :description %><br/><br/>
+
+  <%= f.label :contact_id %><br/>
+  <%= f.collection_select :contact_id, User.where(role: 2).order(:name), :id, :name %><br/><br/>
+
+  <%= f.label :interests %><br/>
+  <%= f.fields_for :interests, @group.interests do |interest| %>
+    <%= f.collection_select :interest_ids, Interest.order(:name), :id, :name %>
+  <% end %><br/><br/>
+
+  <%= f.submit %>
+<% end %>

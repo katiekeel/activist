@@ -1,4 +1,4 @@
-<h1>All Events Nationwide</h1>
+<h1>Admin Events</h1>
 <div class="row">
   <div class="col-md-12">
 
@@ -20,14 +20,16 @@
         <% @events.each do |event| %>
         <tr>
           <th scope="row"> <%= event.name %></th>
-            <td> <%= link_to event.groups.first.name, groups_path %> </td>
+            <td> <%= link_to event.groups.first.name, admin_groups_path %> </td>
             <td> <%= event.human_dates[0] %></td>
             <td> <%= event.human_dates[1] %></td>
             <td> <%= event.human_times[0] %></td>
             <td> <%= event.human_times[1] %></td>
             <td> <%= event.location %></td>
             <td> <%= event.zipcode %></td>
-            <td> <%= link_to event.interests.first.name, interests_path %> </td>
+            <td> <%= link_to event.interests.first.name, admin_interests_path %> </td>
+            <td> <%= link_to "Edit", edit_admin_event_path(event) %></td>
+            <td> <%= link_to "Delete", admin_event_path(event), method: :delete %></td>
         </tr>
         <% end %>
       </tbody>
@@ -35,9 +37,3 @@
     </table>
   </div>
 </div>
-
-<!-- Events by Date -->
-
-<!-- Events by Group -->
-
-<!-- Events by Interest -->

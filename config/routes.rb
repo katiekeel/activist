@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :interests
     resources :groups
     resources :users
+    resources :events
+    resources :dashboard, only: [:index]
   end
 
   namespace :contact do

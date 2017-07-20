@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-  has_and_belongs_to_many :groups
-  has_and_belongs_to_many :events
-  has_and_belongs_to_many :interests
+  has_and_belongs_to_many :groups, dependent: :destroy
+  has_and_belongs_to_many :events, dependent: :destroy
+  has_and_belongs_to_many :interests, dependent: :destroy
 end

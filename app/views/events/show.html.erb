@@ -1,9 +1,12 @@
 <h1><%= @event.name %></h1>
-<h3>with
-  <% @event.groups.each do |group| %>
-    <%= link_to group.name, group_path(group) %><br/>
-  <% end %>
-</h3>
+
+<% if @event.groups.exists? %>
+  <h3>with
+    <% @event.groups.each do |group| %>
+      <%= link_to group.name, group_path(group) %><br/>
+    <% end %>
+  </h3>
+<% end %>
 
 <div class="container text-center">
   <h3><strong>Description: </strong><%= @event.description %></h3>

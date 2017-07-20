@@ -1,0 +1,32 @@
+<h1>Admin Groups</h1>
+
+<h4><%= link_to "Create New Group", new_admin_group_path %></h4>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <table class="table">
+
+      <thead>
+        <th>Group</th>
+        <th>Event Count</th>
+        <th>Top Interest</th>
+        <th>Contact</th>
+      </thead>
+
+      <tbody>
+        <% @groups.each do |group| %>
+        <tr>
+          <th scope="row"> <%= group.name %></th>
+            <td> <%= group.events.count %></td>
+            <td> <%= link_to group.interests.first.name, admin_interests_path if group.interests.exists? %></td>
+            <td> <%= link_to group.contact.name, admin_users_path %>
+            <td> <%= link_to "Edit", edit_admin_group_path(group) %></td>
+            <td> <%= link_to "Delete", admin_group_path(group), method: :delete %>
+        </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>

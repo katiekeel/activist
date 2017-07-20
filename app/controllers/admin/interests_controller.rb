@@ -1,10 +1,12 @@
 class Admin::InterestsController < Admin::BaseController
+
   def index
+    @admin = current_user
     @interests = Interest.all
   end
 
   def show
-    @interest = Interest.find(params[:id])
+    redirect_to admin_interests_path
   end
 
   def new
@@ -24,14 +26,14 @@ class Admin::InterestsController < Admin::BaseController
   end
 
   def edit
-    interest = Interest.find(params[:id])
+    @interest = Interest.find(params[:id])
   end
 
   def update
     @interest = Interest.find(params[:id])
     @interest.update(interest_params)
     if @interest.save
-      flash[:success] = "New interest created!"
+      flash[:success] = "Interest updated!"
       redirect_to admin_interest_path(@interest)
     else
       flash[:failure] = "Please enter attributes correctly."
