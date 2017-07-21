@@ -7,9 +7,9 @@ class Event < ApplicationRecord
   validates :end_time, presence: true
   validates :location, presence: true
   validates :zipcode, presence: true
-  has_and_belongs_to_many :groups, dependent: :destroy
-  has_and_belongs_to_many :interests, dependent: :destroy
-  has_and_belongs_to_many :users, dependent: :destroy
+  has_and_belongs_to_many :groups
+  has_and_belongs_to_many :interests
+  has_and_belongs_to_many :users
 
   def human_dates
     dates = []

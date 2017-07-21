@@ -43,7 +43,7 @@ class Admin::InterestsController < Admin::BaseController
 
   def destroy
     interest = Interest.find(params[:id])
-    interest.delete
+    interest.destroy
     flash[:success] = "Interest successfully deleted!"
     redirect_to admin_interests_path
   end

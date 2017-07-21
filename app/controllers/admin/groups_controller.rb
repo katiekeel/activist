@@ -41,7 +41,7 @@ class Admin::GroupsController < Admin::BaseController
 
   def destroy
     group = Group.find(params[:id])
-    group.delete
+    group.destroy
     flash[:success] = "Interest successfully deleted!"
     redirect_to admin_groups_path
   end

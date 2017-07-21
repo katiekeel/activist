@@ -1,0 +1,14 @@
+<%= form_for [:contact, @group] do |f| %>
+  <%= f.label :name %><br/>
+  <%= f.text_field :name %><br/><br/>
+
+  <%= f.label :description %><br/>
+  <%= f.text_area :description %><br/><br/>
+
+  <%= f.label :interests %><br/>
+  <%= f.fields_for :interests, @group.interests do |interest| %>
+    <%= f.collection_select :interest_ids, Interest.order(:name), :id, :name %>
+  <% end %><br/><br/>
+
+  <%= f.submit %>
+<% end %>

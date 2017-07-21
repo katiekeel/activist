@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   end
 
   namespace :contact do
-    resources :groups do
-      resources :events
-    end
+    resources :groups
+    resources :events
+    resources :dashboard, only: [:index]
   end
 
   resources :interests, only: [:index, :show]

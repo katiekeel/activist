@@ -41,7 +41,7 @@ class Admin::EventsController < Admin::BaseController
 
   def destroy
     event = Event.find(params[:id])
-    event.delete
+    event.destroy
     flash[:success] = "Interest successfully deleted!"
     redirect_to admin_events_path
   end
