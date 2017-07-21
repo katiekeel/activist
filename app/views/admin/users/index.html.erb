@@ -10,23 +10,22 @@
       <thead>
         <th>Username</th>
         <th>Group Count</th>
-        <th>Contact for:</th>
+        <th>Contact for a Group?</th>
         <th>Event Count</th>
       </thead>
 
       <tbody>
+        <% @users.each do |user| %>
         <tr>
-          <th scope="row">Row Name</th>
-            <td>2nd Row 1st Column Content</td>
-            <td>2nd Row 2nd Column Content</td>
-        </tr>
-        <tr>
-          <th scope="row">Second Row Name</th>
-            <td>2nd Row 1st Column Content</td>
-            <td>2nd Row 2nd Column Content</td>
-        </tr>
+          <th scope="row"><%= user.name %></th>
+            <td><%= user.groups.count %></td>
+            <td><%= "Yes" if user.contact? %><%= "No" if user.default? || user.admin? %></td>
+            <td><%= user.events.count %></td>
+            <td><%= link_to "Edit", edit_admin_user_path(user) %></td>
+            <td><%= link_to "Delete", admin_user_path(user), method: :delete %></td>
+          </tr>
+        <% end %>
       </tbody>
-
     </table>
   </div>
 </div>

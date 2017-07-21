@@ -1,14 +1,8 @@
 class Admin::UsersController < Admin::BaseController
 
-  def assign_group_contact
-    current_user.groups.each do |group|
-      group.contact = current_user
-    end
-  end
-
   def index
     @admin = current_user
-    @users = User.all
+    @users = User.order(:name)
   end
 
   def show
@@ -40,6 +34,7 @@ class Admin::UsersController < Admin::BaseController
     @user = User.find(params[:id])
     @user.update(user_params)
     if @user.save
+      @user.groups << Group.find(user_params[:group_ids].reject(&:blank?))
       assign_group_contact if @user.contact?
       flash[:success] = "User updated!"
       redirect_to admin_users_path
@@ -59,7 +54,7 @@ class Admin::UsersController < Admin::BaseController
   private
 
   def user_params
-    params.require(:user).permit(:name, :password, :role, :group_ids, :interest_ids)
+    params.require(:user).permit(:name, :password, :role, group_ids: [], interest_ids: [], event_ids: [])
   end
 
 end

@@ -5,17 +5,19 @@
   <%= f.label :password %><br/>
   <%= f.text_area :password %><br/><br/>
 
-  <%= f.label :role %><br/>
-  <%= f.number_field :role %><br/><br/>
-  
   <%= f.label :groups %><br/>
-  <%= f.fields_for :groups, @event.groups do |group| %>
-    <%= f.collection_select :group_ids, Group.order(:name), :id, :name %>
+  <%= f.fields_for :groups, @user.groups do |group| %>
+    <%= f.collection_check_boxes :group_ids, Group.order(:name), :id, :name %><br/>
   <% end %><br/><br/>
 
   <%= f.label :interests %><br/>
-  <%= f.fields_for :interests, @event.interests do |interest| %>
-    <%= f.collection_select :interest_ids, Interest.order(:name), :id, :name %>
+  <%= f.fields_for :interests, @user.interests do |interest| %>
+    <%= f.collection_check_boxes :interest_ids, Interest.order(:name), :id, :name %><br/>
+  <% end %><br/><br/>
+
+  <%= f.label :events %>
+  <%= f.fields_for :events, @user.events do |event| %>
+    <%= f.collection_check_boxes :event_ids, Event.order(:name), :id, :name %><br/>
   <% end %><br/><br/>
 
   <%= f.submit %>
