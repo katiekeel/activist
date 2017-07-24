@@ -34,7 +34,8 @@ class DefaultUser::GroupsController < DefaultUser::BaseController
     group = Group.find(params[:id])
     @default_user.groups << group
     flash[:success] = "Group added to your list!"
-    redirect_to default_user_groups_path
+    redirect_to default_user_groups_path if current_user.default?
+    redirect_to contact_groups_path if current_user.contact?
   end
 
   def destroy
