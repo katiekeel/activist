@@ -19,7 +19,6 @@ class DefaultUser::GroupsController < DefaultUser::BaseController
   end
 
   def create
-    byebug
     group = Group.new(group_params)
     if group.save
       current_user_contact(group)

@@ -63,7 +63,6 @@ RSpec.describe Event, type: :model do
     end
 
     it "has many interests" do
-      # byebug
       event = create(:event)
 
       expect(event).to respond_to(:interests)
