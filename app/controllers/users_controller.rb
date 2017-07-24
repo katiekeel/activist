@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   skip_before_action :current_user
 
+  def show
+    @user = current_user
+  end
+
   def new
     @account = User.new()
   end
@@ -11,7 +15,8 @@ class UsersController < ApplicationController
     @account.role = 2 if user_params[:role] == "contact"
     if @account.save
       flash[:success] = "New account created!"
-      redirect_to default_user_dashboard_index_path
+      redirect_to default_user_dashboard_index_path if @account.default?
+      redirect_to contact_dashboard_index_path if @account.contact?
     else
       flash[:failure] = "Please enter attributes correctly."
       render :new
@@ -23,13 +28,16 @@ class UsersController < ApplicationController
   end
 
   def update
-    @account.update(user_params)
+    @account = User.find(params[:id])
+    @account.role = 0 if user_params[:role] == "default"
+    @account.role = 2 if user_params[:role] == "contact"
     if @account.save
-      flash[:success] = "User updated!"
-      redirect_to default_user_dashboard_index_path
+      flash[:success] = "New account created!"
+      redirect_to default_user_dashboard_index_path if @account.default?
+      redirect_to contact_dashboard_index_path if @account.contact?
     else
       flash[:failure] = "Please enter attributes correctly."
-      render :edit
+      render :new
     end
   end
 
