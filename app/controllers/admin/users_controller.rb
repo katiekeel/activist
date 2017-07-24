@@ -1,8 +1,14 @@
 class Admin::UsersController < Admin::BaseController
 
+  def assign_group_contact(user)
+    user.groups.each do |group|
+      group.contact = user
+    end
+  end
+
   def index
     @admin = current_user
-    @users = User.order(:name)
+    @users = User.where.not(role: 1).order(:name)
   end
 
   def show
@@ -14,12 +20,11 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def create
-    @admin = User.find(session[:user_id])
     @user = User.new(user_params)
     if @user.save
-      assign_group_contact if @user.contact?
+      assign_group_contact(@user) if @user.contact?
       flash[:success] = "New user created!"
-      redirect_to admin_users_path(@user)
+      redirect_to admin_users_path
     else
       flash[:failure] = "Please enter attributes correctly."
       render :new
@@ -35,7 +40,7 @@ class Admin::UsersController < Admin::BaseController
     @user.update(user_params)
     if @user.save
       @user.groups << Group.find(user_params[:group_ids].reject(&:blank?))
-      assign_group_contact if @user.contact?
+      assign_group_contact(@user) if @user.contact?
       flash[:success] = "User updated!"
       redirect_to admin_users_path
     else

@@ -5,6 +5,9 @@
 
     <table class="table">
 
+      <!-- Change table to have first upcoming event for interest instead of event count -->
+      <!-- Change table to have group with most events in that interest instead of group count -->
+
       <thead>
         <th>Interest</th>
         <th>Group Count</th>
@@ -14,7 +17,7 @@
       <tbody>
         <% @interests.each do |interest| %>
         <tr>
-          <th scope="row"><%= interest.name %></th>
+          <th scope="row"><%= link_to interest.name, interest_path(interest) %></th>
             <td> <%= interest.groups.count %></td>
             <td> <%= interest.events.count %></td>
           </tr>

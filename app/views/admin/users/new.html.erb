@@ -1,3 +1,30 @@
 <h1>New User</h1>
 
-<%= render partial: "form" %>
+<%= form_for [:admin, @user] do |f| %>
+  <%= f.label :name %><br/>
+  <%= f.text_field :name %><br/><br/>
+
+  <%= f.label :password %><br/>
+  <%= f.text_area :password %><br/><br/>
+
+  <%= f.label :role %><br/>
+  <%= f.select :role, User.roles.keys.to_a %><br/><br/>
+
+  <%= f.label :groups %><br/>
+  <%= f.fields_for :groups, @user.groups do |group| %>
+    <%= f.collection_check_boxes :group_ids, Group.order(:name), :id, :name %><br/>
+  <% end %><br/><br/>
+
+  <%= f.label :interests %><br/>
+  <%= f.fields_for :interests, @user.interests do |interest| %>
+    <%= f.collection_check_boxes :interest_ids, Interest.order(:name), :id, :name %><br/>
+  <% end %><br/><br/>
+
+  <%= f.label :events %>
+  <%= f.fields_for :events, @user.events do |event| %>
+    <%= f.collection_check_boxes :event_ids, Event.order(:name), :id, :name %><br/>
+  <% end %><br/><br/>
+
+  <%= f.submit %>
+
+<% end %>

@@ -3,5 +3,6 @@ class Group < ApplicationRecord
   validates :description, presence: true
   has_and_belongs_to_many :interests, -> { distinct }
   has_and_belongs_to_many :events, -> { distinct }
+  has_and_belongs_to_many :users, -> { distinct }
   belongs_to :contact, class_name: "User"
 end

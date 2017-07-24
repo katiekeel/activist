@@ -22,3 +22,7 @@
       <%= link_to interest.name, interest_path(interest) %>
   <% end %>
 </h4>
+
+<% if current_user && current_user.default? %>
+  <h3> <%= link_to "Add to Your Events", default_user_event_path(@event), method: :put %></h3>
+<% end %>

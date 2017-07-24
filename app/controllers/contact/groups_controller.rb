@@ -1,7 +1,12 @@
-class Contact::GroupsController < ApplicationController
+class Contact::GroupsController < Contact::BaseController
+
+# Need to create two instance variables: one scoped off of groups for which user is a contact, and one for which user is just default
+# Need to apply this logic to other contact controllers for when user changes from default to contact
+# Then edit views so that user can only edit groups/events for which they're a contact once they change from default to contact
+# Also need to give contact interests controller
+
   def index
-    @contact = current_user
-    @groups = current_user.groups
+    @groups = @contact.groups
   end
 
   def show
@@ -9,15 +14,14 @@ class Contact::GroupsController < ApplicationController
   end
 
   def new
-    @contact = current_user
-    @group = @contact.groups.new()
+    @group = Group.new()
   end
 
   def create
-    contact = current_user
     group = Group.new(group_params)
     if group.save
-      contact.groups << group
+      group.interests << Interest.find(group_params[:interest_ids].reject(&:blank?))
+      @contact.groups << group
       flash[:success] = "New group created!"
       redirect_to contact_groups_path
     else
@@ -31,10 +35,11 @@ class Contact::GroupsController < ApplicationController
   end
 
   def update
-    @group = @contact.groups.find(params[:id])
-    @group.update(group_params)
-    if @group.save
-      flash[:success] = "Interest updated!"
+    group = @contact.groups.find(params[:id])
+    group.update(group_params)
+    if group.save
+      @contact.groups << group
+      flash[:success] = "Group updated!"
       redirect_to contact_groups_path
     else
       flash[:failure] = "Please enter attributes correctly."
@@ -43,20 +48,16 @@ class Contact::GroupsController < ApplicationController
   end
 
   def destroy
-    byebug
-    contact = current_user
-    group = contact.groups.find(params[:id])
+    group = @contact.groups.find(params[:id])
+    @contact.groups.delete(group)
     group.destroy
-    flash[:success] = "Interest successfully deleted!"
+    flash[:success] = "Group successfully deleted!"
     redirect_to contact_groups_path
   end
 
   private
 
   def group_params
-    @contact = current_user
-    hash = params.require(:group).permit(:name, :description, :interest_ids)
-    hash[:contact] = @contact
-    hash
+    hash = params.require(:group).permit(:name, :description, interest_ids: [])
   end
 end

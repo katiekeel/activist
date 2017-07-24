@@ -1,8 +1,14 @@
-class Contact::EventsController < ApplicationController
+class Contact::EventsController < Contact::BaseController
 
   def index
-    @contact = current_user
-    @events = current_user.events
+    @events = []
+    groups = Group.where(contact: @contact)
+    groups.each do |group|
+      group.events.each do |event|
+        @events << event
+      end
+    end
+    @events.reject(&:blank?)
   end
 
   def show
@@ -16,6 +22,7 @@ class Contact::EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
+      @contact.events << @event
       flash[:success] = "New event created!"
       redirect_to contact_events_path
     else
@@ -32,7 +39,7 @@ class Contact::EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.update(event_params)
     if @event.save
-      flash[:success] = "Interest updated!"
+      flash[:success] = "Event updated!"
       redirect_to contact_events_path
     else
       flash[:failure] = "Please enter attributes correctly."
@@ -42,8 +49,8 @@ class Contact::EventsController < ApplicationController
 
   def destroy
     event = Event.find(params[:id])
-    event.delete
-    flash[:success] = "Interest successfully deleted!"
+    event.destroy
+    flash[:success] = "Event successfully deleted!"
     redirect_to contact_events_path
   end
 

@@ -23,14 +23,14 @@
   <%= f.label :zipcode %><br/>
   <%= f.number_field :zipcode %><br/><br/>
 
-  <%= f.label :groups %><br/>
+  <%= f.label :group %><br/>
   <%= f.fields_for :groups, @event.groups do |group| %>
     <%= f.collection_select :group_ids, Group.order(:name), :id, :name %>
   <% end %><br/><br/>
 
   <%= f.label :interests %><br/>
   <%= f.fields_for :interests, @event.interests do |interest| %>
-    <%= f.collection_select :interest_ids, Interest.order(:name), :id, :name %>
+    <%= f.collection_check_boxes :interest_ids, Interest.order(:name), :id, :name %>
   <% end %><br/><br/>
 
   <%= f.submit %>

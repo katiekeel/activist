@@ -21,6 +21,13 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
   end
 
+  namespace :default_user do
+    resources :groups
+    resources :events
+    resources :interests
+    resources :dashboard, only: [:index]
+  end
+
   resources :interests, only: [:index, :show]
 
   resources :groups, only: [:index, :show]

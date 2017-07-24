@@ -14,11 +14,10 @@ class Admin::InterestsController < Admin::BaseController
   end
 
   def create
-    @admin = User.find(session[:user_id])
     @interest = Interest.new(interest_params)
     if @interest.save
       flash[:success] = "New interest created!"
-      redirect_to admin_interests_path(@interest)
+      redirect_to admin_interests_path
     else
       flash[:failure] = "Please enter attributes correctly."
       render :new

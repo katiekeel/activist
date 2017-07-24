@@ -1,0 +1,46 @@
+<h1>Your Events</h1><br/><br/>
+
+<% if @events.empty? %>
+  <h4>There's nothing here yet! <br/><br/><%= link_to "Events You May Like", events_path %></h4>
+<% else %>
+
+
+<div class="row">
+  <div class="col-md-12">
+
+    <table class="table">
+
+      <thead>
+        <th>Name</th>
+        <th>Primary Group</th>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Location</th>
+        <th>Zipcode</th>
+        <th>Top Interest</th>
+      </thead>
+
+      <tbody>
+        <% @events.each do |event| %>
+        <tr>
+          <th scope="row"> <%= event.name %></th>
+            <td> <%= link_to event.groups.first.name, groups_path %> </td>
+            <td> <%= event.description %> </td>
+            <td> <%= event.human_dates[0] %></td>
+            <td> <%= event.human_times[0] %></td>
+            <td> <%= event.human_times[1] %></td>
+            <td> <%= event.location %></td>
+            <td> <%= event.zipcode %></td>
+            <td> <%= link_to event.interests.first.name, interests_path %> </td>
+            <td> <%= link_to "Delete", default_user_event_path(event), method: :delete %></td>
+        </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+<% end %>

@@ -17,8 +17,8 @@
         <% @groups.each do |group| %>
         <tr>
           <th scope="row"> <%= group.name %></th>
-            <td> <%= group.events.count %></td>
-            <td> <%= link_to group.interests.first.name, admin_interests_path if group.interests.exists? %></td>
+            <td> <%= group.events.count if group.events.exists? %></td>
+            <td> <%= group.interests.first.name if group.interests.exists? %></td>
             <td> <%= link_to "Edit", edit_contact_group_path(group) %></td>
             <td> <%= link_to "Delete", contact_group_path(group), method: :delete %>
         </tr>

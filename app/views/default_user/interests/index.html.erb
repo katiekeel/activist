@@ -1,0 +1,33 @@
+<h1>Your Interests</h1><br/><br/>
+
+<% if @interests.empty? %>
+  <h4>There's nothing here yet! <br/><br/><%= link_to "Interests You May Be... Well, Interested In", interests_path %></h4>
+<% else %>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <table class="table">
+
+      <thead>
+        <th>Interest</th>
+        <th>Group Count</th>
+        <th>Event Count</th>
+      </thead>
+
+      <tbody>
+        <% @interests.each do |interest| %>
+        <tr>
+          <th scope="row"><%= interest.name %></th>
+            <td> <%= interest.groups.count %></td>
+            <td> <%= interest.events.count %></td>
+            <td> <%= link_to "Delete", default_user_interest_path(interest), method: :delete %>
+        </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+<% end %>

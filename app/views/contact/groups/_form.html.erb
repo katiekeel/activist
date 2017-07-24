@@ -7,7 +7,7 @@
 
   <%= f.label :interests %><br/>
   <%= f.fields_for :interests, @group.interests do |interest| %>
-    <%= f.collection_select :interest_ids, Interest.order(:name), :id, :name %>
+    <%= f.collection_check_boxes :interest_ids, Interest.order(:name), :id, :name %>
   <% end %><br/><br/>
 
   <%= f.submit %>

@@ -1,9 +1,13 @@
 <h1>All Groups</h1>
 
+<h4> <%= link_to "Create New Group", new_contact_group_path %> </h4>
+
 <div class="row">
   <div class="col-md-12">
 
     <table class="table">
+
+<!-- Change table to have first upcoming event for group instead of event count -->
 
       <thead>
         <th>Group</th>
@@ -14,9 +18,9 @@
       <tbody>
         <% @groups.each do |group| %>
         <tr>
-          <th scope="row"> <%= group.name %></th>
+          <th scope="row"> <%= link_to group.name, group_path(group) %></th>
             <td> <%= group.events.count %></td>
-            <td> <%= link_to group.interests.first.name, interest_path(group.interests.first) %></td>
+            <td> <%= link_to group.interests.first.name, interest_path(group.interests.first) if group.interests.exists? %></td>
         </tr>
         <% end %>
       </tbody>

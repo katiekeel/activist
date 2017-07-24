@@ -1,0 +1,35 @@
+<h1>Your Groups</h1>
+
+<h4><%= link_to "Create New Group", new_default_user_group_path %></h4><br/><br/>
+
+<% if @groups.empty? %>
+  <h4>There's nothing here yet! <br/><br/><%= link_to "Groups You May Like", groups_path %></h4>
+<% else %>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <table class="table">
+
+      <thead>
+        <th>Group</th>
+        <th>Event Count</th>
+        <th>Top Interest</th>
+      </thead>
+
+      <tbody>
+        <% @groups.each do |group| %>
+        <tr>
+          <th scope="row"> <%= link_to group.name, group_path(group) %></th>
+            <td> <%= group.events.count %></td>
+            <td> <%= link_to group.interests.first.name %></td>
+            <td> <%= link_to "Delete", default_user_group_path(group), method: :delete %>
+        </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+<% end %>

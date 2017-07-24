@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def current_contact?
     current_user && current_user.contact?
   end
+
+  def current_default?
+    current_user && current_user.default?
+  end
 end
