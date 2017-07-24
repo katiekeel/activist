@@ -12,10 +12,11 @@ class Event < ApplicationRecord
   has_and_belongs_to_many :users, -> { distinct }
 
   def human_dates
-    dates = []
-    dates << self.start_date.strftime("%A, %d %b %Y")
-    dates << self.end_date.strftime("%A, %d %b %Y")
-    dates
+    # dates = []
+    # dates << self.start_date.strftime("%A, %d %b %Y")
+    # dates << self.end_date.strftime("%A, %d %b %Y")
+    # dates
+    [self.start_date.strftime("%A, %d %b %Y"), self.end_date.strftime("%A, %d %b %Y")]
   end
 
   def human_times
