@@ -39,9 +39,7 @@
 
 
 <% if current_user && current_user.default? %>
-  <h3> <%= link_to "Add to Your Groups", default_user_group_path(@group), method: :put %></h3>
-<% elsif current_user && current_user.contact? %>
-  <h3> <%= link_to "Add to Your Groups", default_user_group_path(@group), method: :put %></h3>
+  <h3> <%= link_to "Add to Your Interests", default_user_interest_path(@interest), method: :put %></h3>
 <% else %>
   <h3> <%= link_to "Login to RSVP", login_path %> </h3>
 <% end %>
