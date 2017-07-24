@@ -18,10 +18,10 @@ class Contact::GroupsController < Contact::BaseController
   end
 
   def create
-    group = Group.new(group_params)
-    if group.save
-      group.interests << Interest.find(group_params[:interest_ids].reject(&:blank?))
-      @contact.groups << group
+    @group = Group.new(group_params)
+    if @group.save
+      @group.interests << Interest.find(group_params[:interest_ids].reject(&:blank?))
+      @contact.groups << @group
       flash[:success] = "New group created!"
       redirect_to contact_groups_path
     else
@@ -35,10 +35,10 @@ class Contact::GroupsController < Contact::BaseController
   end
 
   def update
-    group = @contact.groups.find(params[:id])
-    group.update(group_params)
-    if group.save
-      @contact.groups << group
+    @group = @contact.groups.find(params[:id])
+    @group.update(group_params)
+    if @group.save
+      @contact.groups << @group
       flash[:success] = "Group updated!"
       redirect_to contact_groups_path
     else

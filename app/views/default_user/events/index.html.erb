@@ -26,14 +26,14 @@
         <% @events.each do |event| %>
         <tr>
           <th scope="row"> <%= event.name %></th>
-            <td> <%= link_to event.groups.first.name, groups_path %> </td>
+            <td> <%= link_to event.groups.first.name, groups_path if event.groups.exists? %> </td>
             <td> <%= event.description %> </td>
             <td> <%= event.human_dates[0] %></td>
             <td> <%= event.human_times[0] %></td>
             <td> <%= event.human_times[1] %></td>
             <td> <%= event.location %></td>
             <td> <%= event.zipcode %></td>
-            <td> <%= link_to event.interests.first.name, interests_path %> </td>
+            <td> <%= link_to event.interests.first.name, interests_path if event.interests.exists? %> </td>
             <td> <%= link_to "Delete", default_user_event_path(event), method: :delete %></td>
         </tr>
         <% end %>

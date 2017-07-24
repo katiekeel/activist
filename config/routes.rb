@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
   end
 
+  resources :users
+
   resources :interests, only: [:index, :show]
 
   resources :groups, only: [:index, :show]
