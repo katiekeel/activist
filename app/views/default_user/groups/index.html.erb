@@ -18,13 +18,15 @@
       </thead>
 
       <tbody>
+        <% unless @groups.nil? %>
         <% @groups.each do |group| %>
         <tr>
           <th scope="row"> <%= link_to group.name, group_path(group) %></th>
             <td> <%= group.events.count %></td>
-            <td> <%= link_to group.interests.first.name %></td>
+            <td> <%= link_to group.interests.first.name if group.interests.exists? %></td>
             <td> <%= link_to "Delete", default_user_group_path(group), method: :delete %>
         </tr>
+        <% end %>
         <% end %>
       </tbody>
 
