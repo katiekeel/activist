@@ -7,7 +7,8 @@ class UsersController < ApplicationController
 
   def create
     @account = User.new(user_params)
-    @account.role = 0
+    @account.role = 0 if user_params[:role] == "default"
+    @account.role = 2 if user_params[:role] == "contact"
     if @account.save
       flash[:success] = "New account created!"
       redirect_to default_user_dashboard_index_path
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :password)
+    params.require(:user).permit(:name, :password, :role)
   end
 
 end
