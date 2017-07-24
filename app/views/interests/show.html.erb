@@ -40,6 +40,7 @@
 
 <% if current_user && current_user.default? %>
   <h3> <%= link_to "Add to Your Interests", default_user_interest_path(@interest), method: :put %></h3>
+<% elsif current_user && current_user.contact? %>
 <% else %>
   <h3> <%= link_to "Login to RSVP", login_path %> </h3>
 <% end %>
