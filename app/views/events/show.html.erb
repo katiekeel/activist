@@ -25,4 +25,8 @@
 
 <% if current_user && current_user.default? %>
   <h3> <%= link_to "Add to Your Events", default_user_event_path(@event), method: :put %></h3>
+<% elsif current_user && current_user.contact? %>
+  <h3> <%= link_to "Add to Your Events", contact_event_path(@event), method: :put %></h3>
+<% else %>
+  <h3> <%= link_to "Login to RSVP", login_path %> </h3>
 <% end %>

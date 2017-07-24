@@ -21,4 +21,6 @@
 
 <% if current_user && current_user.default? %>
   <h3> <%= link_to "Add to Your Groups", default_user_group_path(@group), method: :put %></h3>
+  <% else %>
+    <h3> <%= link_to "Login to Get Involved", login_path %> </h3>
 <% end %>

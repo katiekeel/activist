@@ -1,14 +1,15 @@
 class Contact::EventsController < Contact::BaseController
 
   def index
-    @events = []
+    @contact_events = []
     groups = Group.where(contact: @contact)
     groups.each do |group|
       group.events.each do |event|
         @events << event
       end
     end
-    @events.reject(&:blank?)
+    @contact_events.reject(&:blank?)
+    @events = @contact.events
   end
 
   def show
@@ -37,13 +38,19 @@ class Contact::EventsController < Contact::BaseController
 
   def update
     @event = Event.find(params[:id])
-    @event.update(event_params)
-    if @event.save
-      flash[:success] = "Event updated!"
+    if params[:event].nil?
+      @contact.events << @event
       redirect_to contact_events_path
     else
-      flash[:failure] = "Please enter attributes correctly."
-      render :edit
+      @event.update(event_params)
+      if @event.save
+        @contact.events << @event
+        flash[:success] = "Event updated!"
+        redirect_to contact_events_path
+      else
+        flash[:failure] = "Please enter attributes correctly."
+        render :edit
+      end
     end
   end
 

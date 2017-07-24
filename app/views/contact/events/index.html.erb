@@ -20,6 +20,51 @@
       </thead>
 
       <tbody>
+        <% @contact_events.each do |event| %>
+        <tr>
+          <th scope="row"> <%= event.name %></th>
+            <td> <%= link_to event.groups.first.name, groups_path if event.groups.exists? %> </td>
+            <td> <%= event.description %> </td>
+            <td> <%= event.human_dates[0] %></td>
+            <td> <%= event.human_times[0] %></td>
+            <td> <%= event.human_times[1] %></td>
+            <td> <%= event.location %></td>
+            <td> <%= event.zipcode %></td>
+            <td> <%= link_to event.interests.first.name, interests_path if event.interests.exists? %> </td>
+            <td> <%= link_to "Edit", edit_contact_event_path(event) %></td>
+            <td> <%= link_to "Delete", contact_event_path(event), method: :delete %></td>
+        </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+<br/>
+<br/>
+<br/>
+
+<h1>Events You Just Like</h1>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <table class="table">
+
+      <thead>
+        <th>Name</th>
+        <th>Primary Group</th>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Location</th>
+        <th>Zipcode</th>
+        <th>Top Interest</th>
+      </thead>
+
+      <tbody>
         <% @events.each do |event| %>
         <tr>
           <th scope="row"> <%= event.name %></th>

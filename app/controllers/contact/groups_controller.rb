@@ -6,7 +6,8 @@ class Contact::GroupsController < Contact::BaseController
 # Also need to give contact interests controller
 
   def index
-    @groups = @contact.groups
+    @contact_groups = Group.where(contact: @contact)
+    @groups = @contact.groups.where.not(contact: @contact)
   end
 
   def show
@@ -19,6 +20,7 @@ class Contact::GroupsController < Contact::BaseController
 
   def create
     @group = Group.new(group_params)
+    @group.contact = @contact
     if @group.save
       @group.interests << Interest.find(group_params[:interest_ids].reject(&:blank?))
       @contact.groups << @group
