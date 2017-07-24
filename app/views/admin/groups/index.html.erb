@@ -21,7 +21,7 @@
           <th scope="row"> <%= group.name %></th>
             <td> <%= group.events.count %></td>
             <td> <%= link_to group.interests.first.name, admin_interests_path if group.interests.exists? %></td>
-            <td> <%= link_to group.contact.name, admin_users_path if group.contact.exists? %>
+            <td> <%= link_to group.contact.name, admin_users_path unless group.contact.nil? %>
             <td> <%= link_to "Edit", edit_admin_group_path(group) %></td>
             <td> <%= link_to "Delete", admin_group_path(group), method: :delete %>
         </tr>
