@@ -5,7 +5,7 @@ class Contact::EventsController < Contact::BaseController
     groups = Group.where(contact: @contact)
     groups.each do |group|
       group.events.each do |event|
-        @events << event
+        @contact_events << event
       end
     end
     @contact_events.reject(&:blank?)

@@ -17,6 +17,7 @@
         <th>Location</th>
         <th>Zipcode</th>
         <th>Top Interest</th>
+        <th># Attending</th>
       </thead>
 
       <tbody>
@@ -31,6 +32,7 @@
             <td> <%= event.location %></td>
             <td> <%= event.zipcode %></td>
             <td> <%= link_to event.interests.first.name, interests_path if event.interests.exists? %> </td>
+            <td> <%= event.users.count if event.users.exists? %></td>
           </tr>
         <% end %>
       </tbody>
