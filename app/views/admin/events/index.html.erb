@@ -18,6 +18,7 @@
         <th>Location</th>
         <th>Zipcode</th>
         <th>Top Interest</th>
+        <th># Attendees</th>
       </thead>
 
       <tbody>
@@ -32,6 +33,7 @@
             <td> <%= event.location %></td>
             <td> <%= event.zipcode %></td>
             <td> <%= link_to event.interests.first.name, admin_interests_path if event.interests.exists? %> </td>
+            <td> <%= event.users.count if event.users.exists? %></td>
             <td> <%= link_to "Edit", edit_admin_event_path(event) %></td>
             <td> <%= link_to "Delete", admin_event_path(event), method: :delete %></td>
         </tr>
